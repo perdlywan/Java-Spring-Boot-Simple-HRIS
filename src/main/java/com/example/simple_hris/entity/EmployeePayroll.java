@@ -1,6 +1,5 @@
 package com.example.simple_hris.entity;
 
-import com.example.simple_hris.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
@@ -9,26 +8,24 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "users")
+@Table(name = "employee_payrolls")
 @Data
-public class User {
+public class EmployeePayroll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    private String username;
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private Role role;
+    @Column(name = "salary")
+    private BigDecimal salary;
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)

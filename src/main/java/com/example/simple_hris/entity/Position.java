@@ -13,22 +13,14 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "users")
+@Table(name = "positions")
 @Data
-public class User {
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "user")
-    private Employee employee;
-
-    private String username;
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private Role role;
+    private String name;
 
     @CreatedDate
     @Column(name = "created_date", updatable = false)
