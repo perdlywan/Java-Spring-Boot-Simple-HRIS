@@ -27,9 +27,6 @@ public class Employee {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "employee")
-    private EmployeePayroll payroll;
-
     @Column(name = "first_name")
     private String firstName;
 

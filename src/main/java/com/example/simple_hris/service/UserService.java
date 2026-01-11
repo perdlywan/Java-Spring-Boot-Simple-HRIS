@@ -20,9 +20,10 @@ public class UserService {
     private final PasswordEncoder encoder;
 
     @Transactional
+    @PreAuthorize("hasAnyRole('SUPERADMIN','HRADMIN')")
     public void updateUser(Long id, UpdateUserRequestDTO request){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Employee tidak terdaftar"));
+                .orElseThrow(() -> new DataNotFoundException("User tidak terdaftar"));
 
         updateIfPresent(request.getUsername(), user::setUsername);
         updateIfPresent(request.getPassword(),
